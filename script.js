@@ -1,47 +1,50 @@
-var today = dayjs()
-var submitBtn = document.getElementById('submitBtn')
-var cityText = document.getElementById('city')
-var searchCity ;
+var today = dayjs();
+var submitBtn = document.getElementById("submitBtn");
+var cityText = document.getElementById("city");
+var searchCity = document.getElementById("searchCity")
+var forecast = document.getElementById("forecast")
 //get the city the user enters and hold as a variable
 //input the variable as a parameter in the url
 
-
 //how can i get my api url to console log a response
-var url = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&appid=9ff36362da1db93846317a69ddc36a63";
+http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+// var api = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity.value + ""
+// var apiKey = "&appid=9ff36362da1db93846317a69ddc36a63"
+// // var url = api + searchCity + apiKey
+// //   "https://api.openweathermap.org/data/2.5/forecast?q=" +
+// //   searchCity +
+// //   "&appid=9ff36362da1db93846317a69ddc36a63";
 
-fetch(url)
 
-.then(function (response){
+function getWeather(searchCity) {
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&appid=9ff36362da1db93846317a69ddc36a63&units=imperial"
+    fetch(apiUrl)
+    .then(function (response) {
+      console.log(response.json);
+      return response.json;
+    })
+    .then(function (data) {
+      console.log(data);
     
-    console.log(response.json)
-    return response.json
-   
-})
-.then(function (data){
-    console.log(data)
-})
+     
+    
 
+    });
+    
+    //searchCity = document.getElementById("searchCity").value;
+    console.log("I was clicked");
+  
+    forecast.classList.remove("d-none")
+    cityText.textContent = searchCity.value + "(" + today.format("MM/DD/YYYY") + ")" + " icon";
 
-function getWeather(){
-
-
-    searchCity = document.getElementById('searchCity').value
-    console.log("I was clicked")
-    cityText.innerHTML = searchCity + "("+ today.format('MM/DD/YYYY')+ ")"+ " icon"
-    //get the searched city and display the the weather, temp, humidity, icon
-    //save the searched city in an empty object????
-    //use a for each loop to create a button for each search history
+  //get the searched city and display the the weather, temp, humidity, icon
+  //save the searched city in an empty object????
+  //use a for each loop to create a button for each search history
 }
 
-function saveWeather(){
-   
+function saveWeather() {}
 
-}
-
-
-
-
-submitBtn.addEventListener("click", getWeather)
+submitBtn.addEventListener("click", getWeather);
 //get the variable from the user's input and traverse the DOM
 //get the icon from api based on the user's search
 
