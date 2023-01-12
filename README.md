@@ -19,6 +19,6 @@ THEN I am again presented with current and future conditions for that city
 
 # Mock Up
 
-[!Mock Up](./Assets/06-server-side-apis-homework-demo.png)
+![Mock Up]("./Assets/06-server-side-apis-homework-demo.png")
 
 
