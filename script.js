@@ -3,6 +3,9 @@ var submitBtn = document.getElementById("submitBtn");
 var cityText = document.getElementById("city");
 var searchCity = document.getElementById("searchCity")
 var forecast = document.getElementById("forecast")
+
+var savedSearches = []
+var city;
 //get the city the user enters and hold as a variable
 //input the variable as a parameter in the url
 
@@ -16,37 +19,40 @@ http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country
 // //   "&appid=9ff36362da1db93846317a69ddc36a63";
 
 
-function getWeather(searchCity) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&appid=9ff36362da1db93846317a69ddc36a63&units=imperial"
+//base https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+//
+function getWeather() {
+
+    city = searchCity.value 
+    var apiKey = "9ff36362da1db93846317a69ddc36a63"
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey + "&units=imperial";
     fetch(apiUrl)
     .then(function (response) {
-      console.log(response.json);
-      return response.json;
+    //   console.log(response.json());
+      return response.json();
     })
     .then(function (data) {
+      cityText.textContent = city + "(" + today.format("MM/DD/YYYY") + ")" + "icon" 
       console.log(data);
-    
-     
-    
-
     });
     
-    //searchCity = document.getElementById("searchCity").value;
+   
     console.log("I was clicked");
-  
+    
     forecast.classList.remove("d-none")
-    cityText.textContent = searchCity.value + "(" + today.format("MM/DD/YYYY") + ")" + " icon";
+    
 
   //get the searched city and display the the weather, temp, humidity, icon
   //save the searched city in an empty object????
   //use a for each loop to create a button for each search history
 }
 
-function saveWeather() {}
+function renderButtons() {
+    savedSearches.push()
+}
 
 submitBtn.addEventListener("click", getWeather);
-//get the variable from the user's input and traverse the DOM
-//get the icon from api based on the user's search
+
 
 /*
 GIVEN a weather dashboard with form inputs
