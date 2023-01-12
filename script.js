@@ -3,7 +3,7 @@ var submitBtn = document.getElementById("submitBtn");
 var cityText = document.getElementById("city");
 var searchCity = document.getElementById("searchCity")
 var forecast = document.getElementById("forecast")
-
+var cityContainer = document.getElementById("cityContainer");
 
 var tempText = document.getElementById("temp")
 var windText = document.getElementById("wind")
@@ -23,7 +23,7 @@ var city;
 // //   "&appid=9ff36362da1db93846317a69ddc36a63";
 
 function getWeather() {
-
+   
     city = searchCity.value 
 
     var apiKey = "9ff36362da1db93846317a69ddc36a63"
@@ -37,21 +37,24 @@ function getWeather() {
         var temperature = data.list[0].main.temp
         var wind = data.list[0].wind.speed
         var humidity = data.list[0].main.humidity
+        var icon = data.list[0].weather[0].icon
         console.log(humidity)
         console.log(temperature)
         console.log(wind)
 
-        cityText.textContent = city + "(" + today.format("MM/DD/YYYY") + ")" + "icon"
+        cityText.textContent = city + " (" + today.format("MM/DD/YYYY") + ") " + icon
         windText.textContent = "Wind: " + wind
         tempText.textContent = "Temp: " + temperature
         humidityText.textContent = "Humidity: " + humidity
+
       console.log(data);
     });
     
    
     console.log("I was clicked");
-    
     forecast.classList.remove("d-none")
+    cityContainer.classList.remove("d-none")
+   
     
 
   //get the searched city and display the the weather, temp, humidity, icon
