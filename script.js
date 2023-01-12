@@ -4,13 +4,17 @@ var cityText = document.getElementById("city");
 var searchCity = document.getElementById("searchCity")
 var forecast = document.getElementById("forecast")
 
+
+var tempText = document.getElementById("temp")
+var windText = document.getElementById("wind")
+var humidityText = document.getElementById("humidity")
+
+
 var savedSearches = []
 var city;
 //get the city the user enters and hold as a variable
-//input the variable as a parameter in the url
+//concatenate the variable as a parameter in the url
 
-//how can i get my api url to console log a response
-http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 // var api = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchCity.value + ""
 // var apiKey = "&appid=9ff36362da1db93846317a69ddc36a63"
 // // var url = api + searchCity + apiKey
@@ -18,12 +22,10 @@ http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country
 // //   searchCity +
 // //   "&appid=9ff36362da1db93846317a69ddc36a63";
 
-
-//base https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-//
 function getWeather() {
 
     city = searchCity.value 
+
     var apiKey = "9ff36362da1db93846317a69ddc36a63"
     var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey + "&units=imperial";
     fetch(apiUrl)
@@ -32,7 +34,17 @@ function getWeather() {
       return response.json();
     })
     .then(function (data) {
-      cityText.textContent = city + "(" + today.format("MM/DD/YYYY") + ")" + "icon" 
+        var temperature = data.list[0].main.temp
+        var wind = data.list[0].wind.speed
+        var humidity = data.list[0].main.humidity
+        console.log(humidity)
+        console.log(temperature)
+        console.log(wind)
+
+        cityText.textContent = city + "(" + today.format("MM/DD/YYYY") + ")" + "icon"
+        windText.textContent = "Wind: " + wind
+        tempText.textContent = "Temp: " + temperature
+        humidityText.textContent = "Humidity: " + humidity
       console.log(data);
     });
     
